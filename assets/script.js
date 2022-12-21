@@ -4,52 +4,34 @@ $("#currentDay").text(moment().format('dddd Do MMMM, YYYY HH:mm:ss'));
 $(".btn-group").button("toggle");
 
 //Timeblock variables 
-  $("#timeblock").val(moment().format('HH:mm:ss'));
-  $("#timeblock").change(function() {
-    $("#timeblock").val(moment().format('HH:mm:ss'));
+  $("#currenthour").val(moment().format('HH:mm:ss'));
+  $("#currenthour").change(function() {
+    $("#currenthour").val(moment().format('HH:mm:ss'));
   });
-  $("#timeblock").trigger("change");
-
+  $("#currenthour").trigger("change");
+  const currentHour = moment().hour(); 
 // Checking if on current time or passed it 
-  if(moment().format('HH:mm:ss') == $("#timeblock").val()) {
-    $("#timeblock").val(moment().format('HH:mm:ss'));
-    $("#timeblock").trigger("change");
-  }
+if (blockHour < currentHour) {
+    $(this).addClass("past");
+    $(this).removeClass("future");
+    $(this).removeClass("present");
+}
+else if (blockHour === currentHour) {
+    $(this).removeClass("past");
+    $(this).addClass("present");
+    $(this).removeClass("future");
+}
+else {
+    $(this).removeClass("present");
+    $(this).removeClass("past");
+    $(this).addClass("future");
+}
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//save button and local storage data
+$(".saveBtn").on("click", function () {
+ alert("Saved")
+localStorage.setItem(time, text);
+})
 
 //end of document
